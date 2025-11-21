@@ -47,9 +47,9 @@
         }
     },
     "C1_A_tfidf_comparison": {
-        "time_seconds": 0.8276982307434082
+        "time_seconds": 0.5526366233825684
     },
     "C1_B_embedding_comparison": {
-        "time_seconds": 2.198638677597046
+        "time_seconds": 1.7621748447418213
     }
 }
