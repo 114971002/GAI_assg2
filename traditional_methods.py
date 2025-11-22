@@ -328,7 +328,7 @@ class StatisticalSummarizer:
 # --- 主執行區塊 ---
 
 def ensure_results_dir():
-    """ 確保 'results' 資料夾存在 (符合 page 19 檔案結構) """
+    """ 確保 'results' 資料夾存在 """
     if not os.path.exists('results'):
         os.makedirs('results')
         print("已建立 'results' 資料夾。")
@@ -369,7 +369,7 @@ def run_part_a1(documents):
     print("餘弦相似度矩陣 (sklearn):")
     print(pd.DataFrame(cosine_sim_matrix, index=doc_labels, columns=doc_labels).to_string(float_format="%.4f"))
     
-    # 儲存視覺化 (Page 19 要求)
+    # 儲存視覺化
     plot_similarity_matrix(cosine_sim_matrix, doc_labels, filename="results/tfidf_similarity_matrix.png")
     
     return {'time_seconds': a1_time}
@@ -397,7 +397,7 @@ def run_part_a2(test_texts):
     a2_time = end_time - start_time
     print(f"\n規則式分類總時間: {a2_time:.6f} 秒")
     
-    # 儲存 CSV (Page 19 要求)
+    # 儲存 CSV 
     df = pd.DataFrame(results)
     csv_path = "results/classification_results.csv"
     df.to_csv(csv_path, index=False, encoding='utf-8-sig')
@@ -425,7 +425,7 @@ def run_part_a3(article):
     print("\n生成的摘要:")
     print(summary)
     
-    # 儲存 .txt (Page 19 要求)
+    # 儲存 .txt 
     summary_path = "results/summarization_comparison.txt"
     with open(summary_path, 'w', encoding='utf-8') as f:
         f.write("--- Traditional Statistical Summary ---\n")
@@ -436,28 +436,6 @@ def run_part_a3(article):
     print(f"\n摘要比較檔已儲存至 {summary_path} (Part B 執行後會附加 AI 摘要)")
     
     return {'time_seconds': a3_time, 'summary': summary}
-
-def generate_requirements():
-    """ 
-    生成 requirements.txt (Page 19 要求)
-    內容基於 Page 18 的「必要套件安裝」
-    """
-    requirements = [
-        "numpy",
-        "pandas",
-        "matplotlib",
-        "seaborn",
-        "scikit-learn",
-        "jieba",
-        "chinese-stop-words",
-        "openai", # 雖然 Part A 沒用，但是作業 B 需要
-        "tqdm"  # 雖然 Part A 沒用，但是作業 B 需要
-    ]
-    with open('requirements.txt', 'w', encoding='utf-8') as f:
-        f.write("# 作業2 (hw2) 所需套件\n")
-        for req in requirements:
-            f.write(f"{req}\n")
-    print(f"已生成 'requirements.txt'")
 
 
 def main():
@@ -509,7 +487,7 @@ def main():
     perf_metrics['A2_classify'] = run_part_a2(test_texts_a2)
     perf_metrics['A3_summarize'] = run_part_a3(article_a3)
     
-    # 5. 儲存效能指標 (Page 19 要求)
+    # 5. 儲存效能指標
     perf_path = "results/performance_metrics.json"
     # 存入 'traditional' 欄位下，'modern' 欄位將由 modern_methods.py 新增
     final_metrics = {'traditional': perf_metrics}
@@ -518,8 +496,6 @@ def main():
         json.dump(final_metrics, f, indent=4, ensure_ascii=False)
     print(f"\n傳統方法效能指標已儲存至 {perf_path}")
     
-    # 6. 生成 requirements.txt (Page 19 要求)
-    generate_requirements()
 
     print("\nPart A (traditional_methods.py) 執行完畢。")
 

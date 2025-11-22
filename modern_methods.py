@@ -173,7 +173,7 @@ def summarize_text_gemini(model, article):
         str: AI 生成的摘要
     """
     
-    # PDF (Page 15) 中的 Prompt
+    # PDF 中的 Prompt
     prompt = f"""
 你是一個專業的摘要產生器。
 請將以下文章濃縮成 100 字左右的摘要, 保留核心觀點。
@@ -219,7 +219,7 @@ def run_part_b3(model, article):
     print("\n--- AI 生成的摘要 ---")
     print(ai_summary)
     
-    # 將 AI 摘要附加到 Part A 已建立的檔案中 (Page 15 流程)
+    # 將 AI 摘要附加到 Part A 已建立的檔案中
     try:
         with open(summary_path, 'a', encoding='utf-8') as f:
             f.write("\n\n--- Modern AI Summary (Gemini) ---\n")
@@ -235,7 +235,7 @@ def run_part_b3(model, article):
 # --- 主執行區塊 ---
 
 def ensure_results_dir():
-    """ 確保 'results' 資料夾存在 (符合 page 19 檔案結構) """
+    """ 確保 'results' 資料夾存在 """
     if not os.path.exists('results'):
         os.makedirs('results')
         print("已建立 'results' 資料夾。")
@@ -327,7 +327,7 @@ def main():
     perf_metrics['B2_classify_ai'] = run_part_b2(model_b2, test_texts_a2)
     perf_metrics['B3_summarize_ai'] = run_part_b3(model_b3, article_a3)
     
-    # 5. 更新效能指標 (Page 15 流程)
+    # 5. 更新效能指標
     perf_path = "results/performance_metrics.json"
     
     try:
