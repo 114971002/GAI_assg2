@@ -12,7 +12,7 @@ A-1: TF-IDF 文本相似度計算
 A-2: 基於規則的文本分類
     - 情感分類器 (RuleBasedSentimentClassifier)
     - 主題分類器 (TopicClassifier)
-A-3: 統計式自動摘要 (StatisticalSummarizer) [參考 PDF page 11 流程圖]
+A-3: 統計式自動摘要 (StatisticalSummarizer)
 """
 
 # --- 必要的函式庫 ---
@@ -111,7 +111,7 @@ def calculate_similarity_sklearn(documents):
 def plot_similarity_matrix(matrix, labels, filename="results/tfidf_similarity_matrix.png"):
     """
     將相似度矩陣視覺化並儲存
-    (此為 A-1 評分重點 "視覺化品質" 的一部分 [參考 PDF page 20])
+    (此為 A-1 評分重點 "視覺化品質" 的一部分
     """
     plt.figure(figsize=(10, 8))
     sns.heatmap(matrix, annot=True, cmap='viridis', xticklabels=labels, yticklabels=labels, fmt=".2f")
@@ -227,7 +227,6 @@ class TopicClassifier:
 
 class StatisticalSummarizer:
     def __init__(self):
-        # 載入停用詞 [參考 PDF page 11]
         self.stop_words = set(['的', '了', '在', '是', '我', '有', '和', '就', '不', '人', 
                                '都', '一', '一個', '上', '也', '很', '到', '說', '要', '去', 
                                '你', '，', '。', '、', '？', '！', '（', '）', '「', '」', 
@@ -235,7 +234,7 @@ class StatisticalSummarizer:
         self.punctuation = set("。？！\n") # 用於分句
 
     def _get_sentences(self, text):
-        """ 1. 分句 (處理中文標點) [參考 PDF page 11] """
+        """ 1. 分句 (處理中文標點) """
         sentences = re.split(r'([。？！\n])', text)
         # 合併句子和它們的結尾標點
         combined_sentences = []
@@ -252,14 +251,14 @@ class StatisticalSummarizer:
         return [s for s in combined_sentences if len(s) > 2] # 過濾掉太短的
 
     def _get_word_freq(self, text):
-        """ 2. 分詞並計算詞頻 [參考 PDF page 11] """
+        """ 2. 分詞並計算詞頻 """
         words = [word for word in jieba.cut(text.lower()) 
                  if word not in self.stop_words and not word.isspace()]
         return Counter(words)
 
     def _score_sentence(self, sentence, word_freq, total_sentences, index):
         """
-        計算句子重要性分數 [參考 PDF page 11 流程圖]
+        計算句子重要性分數 
         考量因素:
         1. 包含高頻詞的數量
         2. 句子位置 (首尾句加權)
@@ -297,7 +296,7 @@ class StatisticalSummarizer:
 
     def summarize(self, text, ratio=0.3):
         """
-        生成摘要 [參考 PDF page 11 流程圖]
+        生成摘要 
         """
         # 1. 分句
         sentences = self._get_sentences(text)
@@ -455,7 +454,7 @@ def generate_requirements():
         "tqdm"  # 雖然 Part A 沒用，但是作業 B 需要
     ]
     with open('requirements.txt', 'w', encoding='utf-8') as f:
-        f.write("# 作業2 (hw2) 所需套件 [參考 PDF page 18]\n")
+        f.write("# 作業2 (hw2) 所需套件\n")
         for req in requirements:
             f.write(f"{req}\n")
     print(f"已生成 'requirements.txt'")
@@ -486,7 +485,7 @@ def main():
         "每天慢跑5公里,配合適當的重訓,體能進步很多"
     ]
     
-    # 3. 載入 Part A-3 測試文章 [參考 PDF page 12]
+    # 3. 載入 Part A-3 測試文章 
     # ** 已修正上一版中 'diagnóstico' 的錯字 **
     article_a3 = (
         "人工智慧(AI)的發展正深刻改變我們的生活方式。從早晨起床的智慧鬧鐘,"
