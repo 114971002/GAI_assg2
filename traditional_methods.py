@@ -433,7 +433,7 @@ def run_part_a3(article):
         f.write("\n\n" + "="*20 + "\n\n")
         f.write("--- Original Text ---\n")
         f.write(article.strip())
-    print(f"\n摘要比較檔已儲存至 {summary_path} (Part B 執行後會附加 AI 摘要)")
+    #print(f"\n摘要比較檔已儲存至 {summary_path} (Part B 執行後會附加 AI 摘要)")
     
     return {'time_seconds': a3_time, 'summary': summary}
 
@@ -494,14 +494,11 @@ def main():
     
     with open(perf_path, 'w', encoding='utf-8') as f:
         json.dump(final_metrics, f, indent=4, ensure_ascii=False)
-    print(f"\n傳統方法效能指標已儲存至 {perf_path}")
+    #print(f"\n傳統方法效能指標已儲存至 {perf_path}")
     
 
-    print("\nPart A (traditional_methods.py) 執行完畢。")
+    #print("\nPart A (traditional_methods.py) 執行完畢。")
 
 
 if __name__ == "__main__":
-    # *** 加入偵錯用 print ***
-    print("--- 正在啟動 main() 函式 ---")
     main()
-    print("--- main() 函式執行完畢 ---")
